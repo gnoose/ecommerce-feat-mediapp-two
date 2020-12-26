@@ -17,7 +17,7 @@ const ReadMore = ({ children, more, less, character }) => {
   if (!children) return null;
 
   return (
-    <div style={{ fontWeight: '400', fontSize: '13px', }}>
+    <div style={{ fontWeight: 400, fontSize: '13px', }}>
       {(children && children.length < character) || expanded
         ? children
         : children.substring(0, character)}
@@ -28,7 +28,7 @@ const ReadMore = ({ children, more, less, character }) => {
             <a
               href="#"
               onClick={toggleLines}
-              style={{ color: '#009e7f', fontWeight: '400', fontSize: '13px', }}
+              style={{ color: '#009e7f', fontWeight: 400, fontSize: '13px', }}
             >
               {more}
             </a>
@@ -42,7 +42,7 @@ const ReadMore = ({ children, more, less, character }) => {
             <a
               href="#"
               onClick={toggleLines}
-              style={{ color: '#009e7f', fontWeight: '400', fontSize: '13px', }}
+              style={{ color: '#009e7f', fontWeight: 400, fontSize: '13px', }}
             >
               {less}
             </a>
