@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
 
 export const ProductDetailsWrapper = styled.div`
+  max-width: 1500px;
+  margin: auto;
   background-color: ${themeGet('colors.white', '#ffffff')};
   position: relative;
   display: flex;
@@ -164,6 +166,15 @@ export const ProductPriceWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-shrink: 0;
+`;
+
+
+export const ProductPriceWrapperDisPercent = styled.div`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 400px;
 `;
 
 export const ProductPrice = styled.div`

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from 'components/button/button';
 import {
+  ProductPriceWrapperDisPercent,
   ProductDetailsWrapper,
   ProductPreview,
   ProductInfo,
@@ -29,6 +30,8 @@ import { useLocale } from 'contexts/language/language.provider';
 import { useCart } from 'contexts/cart/use-cart';
 import { Counter } from 'components/counter/counter';
 import { ProductGrid } from 'components/product-grid/product-grid-two';
+import styled from 'styled-components';
+import css from '@styled-system/css';
 
 type ProductDetailsProps = {
   product: any;
@@ -38,6 +41,22 @@ type ProductDetailsProps = {
     desktop: boolean;
   };
 };
+
+
+const Discount = styled.div(
+  css({
+    // position: 'absolute',
+    top: '1rem',
+    left: '1rem',
+    backgroundColor: '#51c9a6',
+    color: '#fff',
+    overflow: 'hidden',
+    padding: '0.25rem 0.5rem',
+    fontSize: 10.5,
+    // borderRadius: 6,
+    pointerEvents: 'none',
+  })
+);
 
 const ProductDetails: React.FunctionComponent<ProductDetailsProps> = ({
   product,
@@ -80,17 +99,22 @@ const ProductDetails: React.FunctionComponent<ProductDetailsProps> = ({
             <ProductTitle>{product.title}</ProductTitle>
           </ProductTitlePriceWrapper>
 
+
+          <ProductPriceWrapperDisPercent>
+            MRP{product.discountInPercent ? (
+            <SalePrice>
+              {CURRENCY}
+              {product.price}
+            </SalePrice>
+          ) : null}
+          </ProductPriceWrapperDisPercent>
           <ProductPriceWrapper>
             <ProductPrice>
               {CURRENCY}
               {product.salePrice ? product.salePrice : product.price}
             </ProductPrice>
-
             {product.discountInPercent ? (
-              <SalePrice>
-                {CURRENCY}
-                {product.price}
-              </SalePrice>
+              <Discount>{product.discountInPercent}% OFF</Discount>
             ) : null}
           </ProductPriceWrapper>
 

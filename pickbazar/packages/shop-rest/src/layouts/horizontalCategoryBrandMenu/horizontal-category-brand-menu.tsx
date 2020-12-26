@@ -32,6 +32,7 @@ SwiperCore.use([Navigation]);
 interface Props {
   type: string;
   url:string;
+  seqNum:string;
 }
 
 const Discount = styled.div(
@@ -49,7 +50,7 @@ const Discount = styled.div(
   })
 );
 
-export const HorizontalCategoryBrandMenu = ({ type , url}: Props) => {
+export const HorizontalCategoryBrandMenu = ({ type , url , seqNum}: Props) => {
   const router = useRouter();
   const option = url;
   const { pathname, query } = router;
@@ -193,7 +194,7 @@ export const HorizontalCategoryBrandMenu = ({ type , url}: Props) => {
         (<Swiper
             id="category-card-menu"
             navigation={{
-              nextEl: '.banner-slider-next', 
+              nextEl: '.banner-slider-next',
               prevEl: '.banner-slider-prev',
             }}
             breakpoints={breakpoints_almt}
@@ -218,7 +219,7 @@ export const HorizontalCategoryBrandMenu = ({ type , url}: Props) => {
           <Swiper
             id="category-card-menu"
             navigation={{
-              nextEl: '.banner-slider-next', 
+              nextEl: '.banner-slider-next',
               prevEl: '.banner-slider-prev',
             }}
             breakpoints={breakpoints_sb}
@@ -243,11 +244,11 @@ export const HorizontalCategoryBrandMenu = ({ type , url}: Props) => {
           <Swiper
             id="category-card-menu"
             navigation={{
-              nextEl: '.banner-slider-next', 
+              nextEl: '.banner-slider-next',
               prevEl: '.banner-slider-prev',
             }}
             breakpoints={breakpoints}
-            spaceBetween={10} 
+            spaceBetween={10}
           >
             {data.map((category, idx) => (
               <SwiperSlide key={idx}>
@@ -257,7 +258,6 @@ export const HorizontalCategoryBrandMenu = ({ type , url}: Props) => {
                 active={selectedQueries === category.slug}
               >
                 <ImageWrapper>
-                  <AddItemToCart data={category} variant="full" buttonText="Add" />
                   <Image url={category.image} alt={category.title} />
                   {category.discountInPercent ? (
                     <Discount>{category.discountInPercent}% OFF</Discount>
@@ -267,6 +267,9 @@ export const HorizontalCategoryBrandMenu = ({ type , url}: Props) => {
                   <Title>{category.title}</Title>
                 </div>
               </ItemCard>
+                <ItemCard1>
+                  <AddItemToCart data={category} variant="full" buttonText="Add" />
+                </ItemCard1>
               </SwiperSlide>
             ))}
           </Swiper>)}

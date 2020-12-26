@@ -4,6 +4,7 @@ import { AddItemToCart } from 'components/add-item-to-cart';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import { Box } from 'components/box';
+import { ItemCard1 } from '../../layouts/horizontal-category-menu/horizontal-category-card-menu.style';
 
 const Card = styled.div({
   backgroundColor: '#fff',
@@ -131,7 +132,6 @@ export const ProductCard = ({ data }: Props) => {
       query: { slug: slug, url: url},
       }}>
       <Card>
-        <AddItemToCart data={data} variant="full" buttonText="Add" />
         <ImageWrapper>
           <Image src={image} alt={title} />
         </ImageWrapper>
@@ -146,6 +146,9 @@ export const ProductCard = ({ data }: Props) => {
               <Discount>{discountInPercent}% OFF</Discount>
             ) : null}
           </PriceWrapper>
+          <ItemCard1>
+            <AddItemToCart data={data} variant="full" buttonText="Add" />
+          </ItemCard1>
         </Box>
       </Card>
     </Link>

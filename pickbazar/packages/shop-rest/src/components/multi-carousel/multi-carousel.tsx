@@ -80,14 +80,16 @@ const CarouselWithCustomDots = ({
     carouselState: { currentSlide, deviceType },
   }: any) => {
     return (
-      <SingleItem
-        data-index={index}
-        key={index}
-        onClick={() => onClick()}
-        className={`custom-dot ${active && 'custom-dot--active'}`}
-      >
-        {React.Children.toArray(images)[index]}
-      </SingleItem>
+      <>
+      {/*<SingleItem*/}
+      {/*  data-index={index}*/}
+      {/*  key={index}*/}
+      {/*  onClick={() => onClick()}*/}
+      {/*  className={`custom-dot ${active && 'custom-dot--active'}`}*/}
+      {/*>*/}
+      {/*  {React.Children.toArray(images)[index]}*/}
+      {/*</SingleItem>*/}
+        </>
     );
   };
   let deviceType = 'desktop';

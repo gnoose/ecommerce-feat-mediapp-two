@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Col, Grid, Row } from 'react-styled-flexboxgrid';
 import { Button } from 'components/button/button';
 import {
+  ProductPriceValue,
+  ProductPriceWrapperDisPercent,
   ProductDetailsWrapper,
   ProductPreview,
   ProductInfo,
@@ -39,6 +41,8 @@ import { BASKET_ADD_PRODUCT, PRODUCTS } from 'endpoints';
 import AuthenticationForm from 'features/authentication-form';
 import { openModal } from '@redq/reuse-modal';
 import { AuthContext } from 'contexts/auth/auth.context';
+import styled from 'styled-components';
+import css from '@styled-system/css';
 
 type ProductDetailsProps = {
   product: any;
@@ -49,6 +53,21 @@ type ProductDetailsProps = {
   };
 };
 const cookies = new Cookies();
+
+const Discount = styled.div(
+  css({
+    // position: 'absolute',
+    top: '1rem',
+    left: '1rem',
+    backgroundColor: '#51c9a6',
+    color: '#fff',
+    overflow: 'hidden',
+    padding: '0.25rem 0.5rem',
+    fontSize: 10.5,
+    // borderRadius: 6,
+    pointerEvents: 'none',
+  })
+);
 
 const ProductDetails: React.FunctionComponent<ProductDetailsProps> = ({
   product,
@@ -121,6 +140,7 @@ const ProductDetails: React.FunctionComponent<ProductDetailsProps> = ({
               deviceType={deviceType}
             />
           </ProductPreview>
+        <div style={{marginTop: '-60px',zIndex: 1,position: 'absolute',left: '300px',}}>
           <ProductDescription>
           <ProductCartBtn>
               {!isInCart(data.id) ? (
@@ -159,7 +179,7 @@ const ProductDetails: React.FunctionComponent<ProductDetailsProps> = ({
                 </Button>
               )}
                </>
-              ) : 
+              ) :
               (
                 <div style={{float: 'right'}}>
                 <Counter
@@ -174,25 +194,31 @@ const ProductDetails: React.FunctionComponent<ProductDetailsProps> = ({
               )}
             </ProductCartBtn>
           </ProductDescription>
+        </div>
       </ImagePart>
 
         <ProductInfo dir={isRtl ? 'rtl' : 'ltr'}>
           <ProductDescription>
           <ProductTitle>{product.title}</ProductTitle>
+            <ReadMore character={600}>{product.description}</ReadMore>
+            <br/>
+            <ProductPriceWrapperDisPercent>
+              MRP{product.discountInPercent ? (
+                <SalePrice>
+                  {CURRENCY}
+                  {product.price}
+                </SalePrice>
+              ) : null}
+            </ProductPriceWrapperDisPercent>
           <ProductPriceWrapper>
-            <ProductPrice>
+            <ProductPriceValue>
               {CURRENCY}
               {product.salePrice ? product.salePrice : product.price}
-            </ProductPrice>
-
+            </ProductPriceValue>
             {product.discountInPercent ? (
-              <SalePrice>
-                {CURRENCY}
-                {product.price}
-              </SalePrice>
+              <Discount>{product.discountInPercent}% OFF</Discount>
             ) : null}
           </ProductPriceWrapper>
-            <ReadMore character={600}>{product.description}</ReadMore>
             <Row>
               <Col>
             <ProductPrice>Weight/Quantity :  </ProductPrice>

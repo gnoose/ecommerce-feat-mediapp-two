@@ -52,6 +52,50 @@ interface Props {
   style?: any;
 }
 
+const FilterDiv = styled.div({
+  width: '230px',
+  zIndex: 9,
+  position:'absolute',
+  background: '#fff',
+  color: '#505050',
+});
+const FilterSection = styled.div({
+  borderBottom: '1px solid #F4F4F4',
+  padding: '15px',
+  h2: {
+    fontSize: '18px',
+    fontWeight: 400,
+    margin: 0,
+  }
+});
+
+const FilterSectionBar = styled.div({
+  marginBottom: '8px',
+  paddingLeft: '20px',
+  span: {
+    fontSize: '14px',
+    fontWeight: 800,
+    maxWidth: '84%',
+  }
+});
+
+const FilterSectionItem = styled.div({
+  marginBottom: '5px',
+  paddingLeft: '30px',
+  span: {
+    fontSize: '12px',
+    fontWeight: 400,
+    maxWidth: '84%',
+  },
+  label: {
+    fontSize: '12px',
+    fontWeight: 400,
+    maxWidth: '84%',
+  }
+});
+
+
+
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop-100);
 
 export const ProductGrid = ({
@@ -63,6 +107,10 @@ export const ProductGrid = ({
   const myRef = useRef(null)
   const executeScroll = () => scrollToRef(myRef)
   const router = useRouter();
+  //---------------
+  const { pathname, query } = router;
+  const selectedQueries = query.category;
+  //---------------
   const href = router.pathname;
   const [loading, setLoading] = useState(false);
   const { data, error , hasMore, fetchMore } = useProducts({
@@ -72,6 +120,7 @@ export const ProductGrid = ({
     offset: 0,
     limit: fetchLimit,
   });
+
 
   if (error) return <ErrorMessage message={error.message} />;
   if (!data){
@@ -102,70 +151,70 @@ export const ProductGrid = ({
     setLoading(false);
   };
 
+  const onCategoryClick = (slug: string) => {
+      const { type, ...rest } = query;
+      if (type) {
+        router.push(
+          {
+            pathname,
+            query: { ...rest, category: slug },
+          },
+          {
+            pathname: `/${type}`,
+            query: { ...rest, category: slug },
+          }
+        );
+      } else {
+        router.push({
+          pathname,
+          query: { ...rest, category: slug },
+        });
+      }
+  };
+
   return (
     <div ref={myRef}>
       {(loading===true) ? <CubeGrid color="#009E7F" size="60px"/> :
       <>
-      <div style={{width: '230px', zIndex: 9,position:'absolute',background: '#fff', color: '#505050',}}>
-        <div style={{borderBottom: '1px solid #F4F4F4', padding: '15px'}}>
-          <h2 style={{fontSize: '18px', fontWeight: 400, margin: 0, }}>Filter By</h2>
-        </div>
-        <div>
-          <div style={{marginBottom: '8px', paddingLeft: '20px' }}>
-            <a><span style={{fontSize: '14px', fontWeight: 800, maxWidth: '84%', }}>Shop by Brand</span></a>
+        <FilterDiv>
+          <FilterSection>
+            <h2>Filter By</h2>
+          </FilterSection>
+          <div>
+            <FilterSectionBar><a><span>Shop by Brand</span></a></FilterSectionBar>
+            <FilterSectionItem><a onClick={() => onCategoryClick('baidyanath')}><span>Baidyanath</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('dabur')}><span>Dabur</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('sbl')}><span>Sbl</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('zandu')}><span>Zandu</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('schwabe')}><span>Schwabe</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('himalaya')}><span>Himalaya</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('baksons')}><span>Baksons</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('bio-force')}><span>Bio-Force</span></a></FilterSectionItem>
           </div>
-          <div style={{marginBottom: '5px', paddingLeft: '30px' }}>
-            <a><span style={{fontSize: '12px', fontWeight: 400, maxWidth: '84%', }}>Baidyanath</span></a>
-          </div>
-          <div style={{marginBottom: '5px', paddingLeft: '30px' }}>
-            <a><span style={{fontSize: '12px', fontWeight: 400, maxWidth: '84%', }}>Dabur</span></a>
-          </div>
-          <div style={{marginBottom: '5px', paddingLeft: '30px' }}>
-            <a><span style={{fontSize: '12px', fontWeight: 400, maxWidth: '84%', }}>Sbl</span></a>
-          </div>
+          <div>
+            <FilterSectionBar><a><span>Shop by Health Conditions</span></a></FilterSectionBar>
+            <FilterSectionItem><a onClick={() => onCategoryClick('anaemia-and-inflammation')}><span>Anaemia And Inflammation</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('cardiac-care')}><span>Cardiac Care</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('fever-anti-bacteria-viral-infection')}><span>Fever , Anti Bacteria, Viral Infection</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('hair-care')}><span>Hair Care</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('immunity-and-stress-care')}><span>Immunity And Stress Care</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('joint-cramps-sprian-muscle-pains')}><span>Joint, Cramps, Sprian , Muscle Pains</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('nasal-care')}><span>Nasal Care</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('urinary-and-anus-problems')}><span>Urinary And Anus Problems</span></a></FilterSectionItem>
+            <FilterSectionItem><a onClick={() => onCategoryClick('skin-and-beauty-care')}><span>Skin And Beauty Care</span></a></FilterSectionItem>
 
-        </div>
-        <div>
-          <div style={{marginBottom: '8px', paddingLeft: '20px' }}>
-            <a><span style={{fontSize: '14px', fontWeight: 800, maxWidth: '84%', }}>Shop by Health Conditions</span></a>
           </div>
-          <div style={{marginBottom: '5px', paddingLeft: '30px' }}>
-            <a><span style={{fontSize: '12px', fontWeight: 400, maxWidth: '84%', }}>Anaemia And Inflammation</span></a>
+          <div>
+            <FilterSectionBar><a><span>Price</span></a></FilterSectionBar>
+            <FilterSectionItem><input type={"checkbox"} /><label>Below 200</label></FilterSectionItem>
+            <FilterSectionItem><input type={"checkbox"} /><label>201 - 500</label></FilterSectionItem>
+            <FilterSectionItem><input type={"checkbox"} /><label>501 - 1000</label></FilterSectionItem>
+            <FilterSectionItem><input type={"checkbox"} /><label>Above 1000</label></FilterSectionItem>
           </div>
-          <div style={{marginBottom: '5px', paddingLeft: '30px' }}>
-            <a><span style={{fontSize: '12px', fontWeight: 400, maxWidth: '84%', }}>Cardiac Care</span></a>
+          <div>
+            <button style={{background: '#fff', padding: '2px 4px', color: '#51C9A6', borderColor:'#51C9A6', marginLeft: '150px',}}>View All</button>
           </div>
-          <div style={{marginBottom: '5px', paddingLeft: '30px' }}>
-            <a><span style={{fontSize: '12px', fontWeight: 400, maxWidth: '84%', }}>Hair Care</span></a>
-          </div>
-
-        </div>
-        <div>
-          <div style={{marginBottom: '8px', paddingLeft: '20px' }}>
-            <a><span style={{fontSize: '14px', fontWeight: 800, maxWidth: '84%', }}>Price</span></a>
-          </div>
-          <div style={{marginBottom: '5px', paddingLeft: '30px' }}>
-            <input type={"checkbox"} />
-            <label style={{fontSize: '12px', fontWeight: 400, maxWidth: '84%', }}>Below 200</label>
-          </div>
-          <div style={{marginBottom: '5px', paddingLeft: '30px' }}>
-            <input type={"checkbox"} />
-            <label style={{fontSize: '12px', fontWeight: 400, maxWidth: '84%', }}>201 - 500</label>
-          </div>
-          <div style={{marginBottom: '5px', paddingLeft: '30px' }}>
-            <input type={"checkbox"} />
-            <label style={{fontSize: '12px', fontWeight: 400, maxWidth: '84%', }}>501 - 1000</label>
-          </div>
-          <div style={{marginBottom: '5px', paddingLeft: '30px' }}>
-            <input type={"checkbox"} />
-            <label style={{fontSize: '12px', fontWeight: 400, maxWidth: '84%', }}>Above 1000</label>
-          </div>
-
-        </div>
-        <div>
-          <button style={{background: '#fff', padding: '2px 4px', color: '#51C9A6', borderColor:'#51C9A6', marginLeft: '150px',}}>View All</button>
-        </div>
-      </div>
+        </FilterDiv>
 
       <section style={{ margin: '0px 20px 0px 20px', paddingLeft: '230px',}}>
         <Grid style={style}>

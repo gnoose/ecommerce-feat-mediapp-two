@@ -15,9 +15,8 @@ const Icon = styled.span<any>(
   _variant({
     variants: {
       full: {
-        p: '6px',
+        px: 3,
         height: 36,
-        width: 36,
         backgroundColor: '#e6e6e6',
         transition: '0.35s ease-in-out',
         display: 'flex',
@@ -29,13 +28,8 @@ const Icon = styled.span<any>(
 
 const Button = styled.button<any>(
   css({
-    right: '5px',
-    top: '5px',
-    position: 'absolute',
-    zIndex: '1',
-    width: 36,
     height: 36,
-    borderRadius: '50%',
+    borderRadius: 6,
     transition: '0.35s ease-in-out',
     backgroundColor: '#fff',
     border: '1px solid',
@@ -50,7 +44,7 @@ const Button = styled.button<any>(
   _variant({
     variants: {
       full: {
-        // width: '100%',
+        width: '100%',
         display: 'flex',
         alignItems: 'center',
         backgroundColor: '#f3f3f3',
@@ -124,45 +118,71 @@ export const AddItemToCart = ({ data, variant, buttonText }: Props) => {
 
   return (
     data.products ? (
-  !isInCart(data.products) ? (
-    <Button
-      aria-label="add item to cart"
-      onClick={handleAddClick}
-      variant={variant}
-    >
-      <Icon variant={variant}>
-        <img src={ShoppingCart} />
-      </Icon>
-    </Button>
-  ) : (
-    <Counter
-      value={getItem(data.products).quantity}
-      url={getItem(data.products).url}
-      onDecrement={handleRemoveClick}
-      onIncrement={handleAddClick}
-      className='card-counter'
-      variant='altHorizontal'
-    />
-  )) :
-  !isInCart(data.id) ? (
-    <Button
-      aria-label="add item to cart"
-      onClick={handleAddClick}
-      variant={variant}
-    >
-      <Icon variant={variant}>
-        <img src={ShoppingCart} />
-      </Icon>
-    </Button>
-  ) : (
-    <Counter
-      value={getItem(data.id).quantity}
-      url={getItem(data.id).url}
-      onDecrement={handleRemoveClick}
-      onIncrement={handleAddClick}
-      className='card-counter'
-      variant='altHorizontal'
-    />
-  )
+        !isInCart(data.products) ? (
+          <Button
+            aria-label="add item to cart"
+            onClick={handleAddClick}
+            variant={variant}
+          >
+            {!!buttonText && <Box flexGrow={1}>{buttonText}</Box>}
+            <Icon variant={variant}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+              >
+                <path
+                  data-name="Path 9"
+                  d="M143.407,137.783h-1.25v4.375h-4.375v1.25h4.375v4.375h1.25v-4.375h4.375v-1.25h-4.375Z"
+                  transform="translate(-137.782 -137.783)"
+                  fill="currentColor"
+                />
+              </svg>
+            </Icon>
+          </Button>
+        ) : (
+          <Counter
+            value={getItem(data.products).quantity}
+            url={getItem(data.products).url}
+            onDecrement={handleRemoveClick}
+            onIncrement={handleAddClick}
+            className='card-counter'
+            variant='altHorizontal'
+          />
+        )) :
+      !isInCart(data.id) ? (
+        <Button
+          aria-label="add item to cart"
+          onClick={handleAddClick}
+          variant={variant}
+        >
+          {!!buttonText && <Box flexGrow={1}>{buttonText}</Box>}
+          <Icon variant={variant}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+            >
+              <path
+                data-name="Path 9"
+                d="M143.407,137.783h-1.25v4.375h-4.375v1.25h4.375v4.375h1.25v-4.375h4.375v-1.25h-4.375Z"
+                transform="translate(-137.782 -137.783)"
+                fill="currentColor"
+              />
+            </svg>
+          </Icon>
+        </Button>
+      ) : (
+        <Counter
+          value={getItem(data.id).quantity}
+          url={getItem(data.id).url}
+          onDecrement={handleRemoveClick}
+          onIncrement={handleAddClick}
+          className='card-counter'
+          variant='altHorizontal'
+        />
+      )
   );
 };

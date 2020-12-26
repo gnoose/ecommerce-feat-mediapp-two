@@ -112,11 +112,11 @@ export default function GroceryTwoPage({ deviceType }) {
           {<MobileBanner intlTitleId='medsmitra' type={PAGE_TYPE} />}
 
           <Banner data={bannerSlides} deviceType={deviceType} />
-          <HorizontalCategoryBrandMenu type={PAGE_TYPE} url={'search by brand'} />
-          <HorizontalCategoryBrandMenu type={PAGE_TYPE} url={'search by health conditions'} />
-          <HorizontalCategoryBrandMenu type={PAGE_TYPE} url={'bestselled'} />
-          <HorizontalCategoryBrandMenu type={PAGE_TYPE} url={'bestoffers'} />
-          <HorizontalCategoryBrandMenu type={PAGE_TYPE} url={'discount'} />
+          <HorizontalCategoryBrandMenu type={PAGE_TYPE} url={'search by brand'} seqNum={'1'} />
+          <HorizontalCategoryBrandMenu type={PAGE_TYPE} url={'search by health conditions'} seqNum={'2'} />
+          <HorizontalCategoryBrandMenu type={PAGE_TYPE} url={'bestselled'} seqNum={'3'} />
+          <HorizontalCategoryBrandMenu type={PAGE_TYPE} url={'bestoffers'} seqNum={'4'} />
+          <HorizontalCategoryBrandMenu type={PAGE_TYPE} url={'discount'} seqNum={'5'} />
           <OfferSection>
             <div style={{ margin: '0 -10px' }}>
               <Carousel deviceType={deviceType} data={siteOffers} />
