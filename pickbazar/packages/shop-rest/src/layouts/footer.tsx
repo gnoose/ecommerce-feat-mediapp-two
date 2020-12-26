@@ -30,7 +30,6 @@ const Box = styled.div(
     fontWeight: 'regular',
     color: 'white',
     px: 10,
-    background: 'rgb(0, 128, 96)',
     width: '90%',
     border: '10px',
     border_radius: '10px',
