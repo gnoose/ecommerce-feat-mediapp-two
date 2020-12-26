@@ -1,0 +1,13 @@
+export const sitePricingPolicy = {
+    title: 'Pricing Policy',
+    date: '01/01/2020',
+    content: [
+      {
+        id: '1',
+        title: 'Price and Payment',
+        description:
+          '<p>The installation and use of this Website/App is free of cost. However,  it is to be noted that although browsing of the Website / App is free, for purchase of any products, one has to be registered on our website – which is free of cost. However this policy of no charges may be amended by Medsmitra as deemed necessary.<br>For the purpose of this section,  Buyer would include any user choosing to use the products / services offered on Medsmitra Website / App. Seller means Medsmitra.<br>In the case of use of any payment methods availed on Medsmitra Website/App, Medsmitra will not be responsible or assume any liability, whatsoever in respect of any loss or damage arising directly or indirectly to you due to issues including but not limited to - Lack of authorization for any transaction(s), exceeding preset spending limit / credit limit set up between you and your Financial Institution, any payment issues arising out of the failure of the transactions due to any technical issues, any decline of transactions due to any other reasons and so on.<br><br>As of now, all payments will be in the default currency of Indian Rupees only. Medsmitra Website/App will not facilitate transactions using any other form of currency other than Indian Rupee. <br><br>The price of products shown includes all applicable statutory taxes. We ensure that we take all necessary measures for the pricing and availability of Products to reflect the latest information on Medsmitra website / APP. But, in certain cases there might be some errors due to price changes or product availability. In such cases we are not responsible for those errors and we reserve the right to cancel the sale and refund the amount to you. We also reserve the right to correct any errors due to data typography, inaccuracies, omissions and can change or update any information of the product at any time without any prior notice. <br><br>We offer to deliver your order FREE of cost in the designated PIN CODES as listed. The delivery PIN CODES are available for you once you register in the website / app as a User.<br><br>The delivery times may vary depending on certain parameters such as delivery location, products ordered and working days / public holidays and so on.  In general the product will be delivered within 48 hours of the placing of the order but in some cases there may be delays for which we will communicate to You.<br><br>Your payment will be using the designated payment gateway with any Credit/Debit cards, Net banking and so on. </p>',
+      },
+    ],
+  };
+  
