@@ -53,6 +53,10 @@ const PopupItemCount = styled.div`
       font-size: ${themeGet('fontSizes.sm', '13')}px;
     }
   }
+  
+  h2 {
+    color: #505050;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -373,12 +377,14 @@ const ErrorMsg = styled.span`
 `;
 
 const CartSlidePopup = styled.div`
-  width: 420px;
-  height: 100vh;
+  width: 800px;
+  // height: 100vh;
+  height: 500px;
   background-color: ${themeGet('colors.white', '#ffffff')};
   position: fixed;
-  bottom: 0;
-  right: -450px;
+  top: 100px;
+  // bottom: 0;
+  right: -2450px;
   z-index: 1010;
   box-shadow: ${themeGet('shadows.big', '0 21px 36px rgba(0, 0, 0, 0.16)')};
   transition: all 0.35s ease-in-out;
@@ -393,7 +399,7 @@ const CartSlidePopup = styled.div`
   }
 
   &.cartPopupFixed {
-    right: 0;
+    right: 400px;
   }
 
   ${CartPopupBody} {

@@ -8,12 +8,39 @@ export const ItemBox = styled.div(
     px: 25,
     borderBottom: `1px solid`,
     borderBottomColor: 'gray.200',
+    color: '#505050',
   }),
   {
     display: 'flex',
     alignItems: 'center',
   }
 );
+
+export const CartsBannarItem = styled.div`
+  width: 45%;
+  align-items: center;
+  display: flex;
+`;
+
+export const CartsBannarQuantity = styled.div`
+  width: 20%;
+  align-items: center;
+  display: flex;
+`;
+
+export const CartsBannarPrice = styled.div`
+  width: 15%;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const CartsBannarSubtotal = styled.div`
+  width: 20%;
+  align-items: center;
+  display: flex;
+`;
+
 export const Information = styled.div({
   display: 'flex',
   flexDirection: 'column',

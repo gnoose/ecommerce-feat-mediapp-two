@@ -35,6 +35,7 @@ import AuthenticationForm from 'features/authentication-form';
 import { openModal ,closeModal} from '@redq/reuse-modal';
 import { Cookies } from 'react-cookie';
 import { CubeGrid } from 'styled-loaders-react';
+import styled from 'styled-components';
 
 
 type CartPropsType = {
@@ -43,6 +44,42 @@ type CartPropsType = {
   scrollbarHeight?: string;
   onCloseBtnClick?: (e: any) => void;
 };
+
+const CartsBannar = styled.div`
+  float: left;
+  width: 100%;
+  padding: 5px 25px;
+  border-bottom: 2px solid #ccc;
+  color: #ccc;
+  font-weight: 500;
+  align-items: center;
+`;
+
+const CartsBannarItem = styled.div`
+  float: left;
+  width: 45%;
+`;
+
+const CartsBannarQuantity = styled.div`
+  float: left;
+  width: 20%;
+`;
+
+const CartsBannarPrice = styled.div`
+  float: left;
+  width: 15%;
+`;
+
+const CartsBannarSubtotal = styled.div`
+  float: left;
+  width: 20%;
+`;
+
+const Clearify = styled.div`
+  clear: both;
+`;
+
+
 
 const Cart: React.FC<CartPropsType> = ({
   style,
@@ -125,6 +162,7 @@ const Cart: React.FC<CartPropsType> = ({
     <CartPopupBody className={className} style={style}>
       <PopupHeader>
         <PopupItemCount>
+          <h4>{"Shopping Cart "}</h4><span>{" ( "}</span>
           <ShoppingBagLarge width='19px' height='24px' />
           <span>
             {cartItemsCount}
@@ -135,6 +173,7 @@ const Cart: React.FC<CartPropsType> = ({
                 <FormattedMessage id='cartItem' defaultMessage='item' />
               )}
           </span>
+          <span>{" )"}</span>
         </PopupItemCount>
 
         <CloseButton onClick={onCloseBtnClick}>
@@ -144,6 +183,13 @@ const Cart: React.FC<CartPropsType> = ({
 
       <Scrollbar className='cart-scrollbar'>
         <ItemWrapper className='items-wrapper'>
+          <CartsBannar>
+            <CartsBannarItem>{"Item"}</CartsBannarItem>
+            <CartsBannarQuantity>{"Quantity"}</CartsBannarQuantity>
+            <CartsBannarPrice>{"Price"}</CartsBannarPrice>
+            <CartsBannarSubtotal>{"Sub Total"}</CartsBannarSubtotal>
+          </CartsBannar>
+          <Clearify></Clearify>
           {!!cartItemsCount ? (
             items.map((item, id) => (
               <CartItem

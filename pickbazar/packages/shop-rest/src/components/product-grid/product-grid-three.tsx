@@ -76,7 +76,7 @@ const FilterSectionBar = styled.div({
     fontSize: '14px',
     fontWeight: 800,
     maxWidth: '84%',
-  }
+  },
 });
 
 const FilterSectionItem = styled.div({
@@ -86,11 +86,19 @@ const FilterSectionItem = styled.div({
     fontSize: '12px',
     fontWeight: 400,
     maxWidth: '84%',
+    '&:hover': {
+      fontWeight: 800,
+      cursor: 'pointer',
+    },
   },
   label: {
     fontSize: '12px',
     fontWeight: 400,
     maxWidth: '84%',
+    '&:hover': {
+      fontWeight: 800,
+      cursor: 'pointer',
+    },
   }
 });
 
@@ -206,10 +214,10 @@ export const ProductGrid = ({
           </div>
           <div>
             <FilterSectionBar><a><span>Price</span></a></FilterSectionBar>
-            <FilterSectionItem><input type={"checkbox"} /><label>Below 200</label></FilterSectionItem>
-            <FilterSectionItem><input type={"checkbox"} /><label>201 - 500</label></FilterSectionItem>
-            <FilterSectionItem><input type={"checkbox"} /><label>501 - 1000</label></FilterSectionItem>
-            <FilterSectionItem><input type={"checkbox"} /><label>Above 1000</label></FilterSectionItem>
+            <FilterSectionItem><label><input type={"checkbox"} />Below 200</label></FilterSectionItem>
+            <FilterSectionItem><label><input type={"checkbox"} />201 - 500</label></FilterSectionItem>
+            <FilterSectionItem><label><input type={"checkbox"} />501 - 1000</label></FilterSectionItem>
+            <FilterSectionItem><label><input type={"checkbox"} />Above 1000</label></FilterSectionItem>
           </div>
           <div>
             <button style={{background: '#fff', padding: '2px 4px', color: '#51C9A6', borderColor:'#51C9A6', marginLeft: '150px',}}>View All</button>

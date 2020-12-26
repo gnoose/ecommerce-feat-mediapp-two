@@ -16,7 +16,7 @@ flex-shrink: 0;
     font-family: ${themeGet('fonts.body', 'Lato')};
     font-size: ${themeGet('fontSizes.base', '15')}px;
     font-weight: ${themeGet('fontWeights.bold', '700')};
-    color: ${themeGet('colors.text.bold', '#0D1136')};
+    color: #505050;
     line-height: 1.2em;
     display: block;
     transition: 0.15s ease-in-out;

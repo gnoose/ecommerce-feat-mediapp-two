@@ -200,18 +200,18 @@ export const Divider = styled.div`
   }
 `;
 export const SliderNav = styled.button({
-  width: 30,
-  height: 30,
+  width: 40,
+  height: 60,
+  color: '#505050',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'text.bold',
   backgroundColor: 'white',
   boxShadow: '0 3px 6px rgba(0, 0, 0, 0.16)',
   outline: 0,
   padding: 0,
   border: 0,
-  borderRadius: '50%',
+  // borderRadius: '50%',
   position: 'absolute',
   top: '50%',
   marginTop: '-15px',

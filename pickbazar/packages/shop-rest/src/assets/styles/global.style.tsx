@@ -9,7 +9,6 @@ export const InjectRTL = styled.div`
     font-family: 'Cairo', sans-serif;
     `}
 `;
-
 export const GlobalStyle = createGlobalStyle(({ theme }) =>
   css({
     '*, *::before, *::after': {
