@@ -17,6 +17,16 @@ import { SidebarWithCardMenu } from 'layouts/sidebar/sidebar-with-card-menu';
 import { MainContentArea, ContentSection, SidebarSection, OfferSection } from 'assets/styles/pages.style';
 // import { Button } from './button';
 import dynamic from 'next/dynamic';
+import SwiperCore, { Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import {
+  CategoryInner, ImageWrapper, ItemCard, ItemCard1,
+  SliderNav, Title,
+} from '../../layouts/horizontalCategoryBrandMenu/horizontal-category-brand-menu.style';
+import { ArrowNext } from '../../assets/icons/ArrowNext';
+import { ArrowPrev } from '../../assets/icons/ArrowPrev';
+import Image from '../image/image';
+import { AddItemToCart } from '../add-item-to-cart';
 
 const Sidebar = dynamic(() => import('layouts/sidebar/sidebar'));
 
@@ -56,6 +66,7 @@ interface Props {
   loadMore?: boolean;
   fetchLimit?: number;
   style?: any;
+  isRelated?: boolean;
 }
 
 const PAGE_TYPE = 'furniture';
@@ -65,6 +76,7 @@ export const ProductGrid = ({
   type,
   loadMore = true,
   fetchLimit = 30,
+  isRelated = false,
 }: Props) => {
   const router = useRouter();
   const href = router.pathname;
@@ -106,17 +118,71 @@ export const ProductGrid = ({
     await fetchMore(Number(data.length), fetchLimit, hasMore);
     setLoading(false);
   };
-  
+  const breakpoints = {
+    320: {
+      slidesPerView: 2,
+    },
+
+    520: {
+      slidesPerView: 3,
+    },
+
+    620: {
+      slidesPerView: 4,
+    },
+
+    820: {
+      slidesPerView: 5,
+    },
+
+    1100: {
+      slidesPerView: 6,
+    },
+
+    1280: {
+      slidesPerView: 7,
+    },
+  };
   return (
     <section>
       {/* <SidebarSection>
             <Sidebar type={PAGE_TYPE} deviceType={type} />
           </SidebarSection> */}
-      <Grid style={style}>
-        {data.map((product, idx) => (
-          <ProductCard data={product} key={product.id} />
-        ))}
-      </Grid>
+
+        {(!isRelated) ?
+          <Grid style={style}>
+            {data.map((product, idx) => (
+              <ProductCard data={product} key={product.id} />
+            ))}
+          </Grid>
+          :
+          (<CategoryInner>
+            <Swiper
+            id="category-card-menu"
+            navigation={{
+              nextEl: '.banner-slider-next',
+              prevEl: '.banner-slider-prev',
+            }}
+            slidesPerView={6}
+            spaceBetween={10}
+          >
+            {data.map((product, idx) => (
+              <SwiperSlide key={idx} >
+                <ProductCard data={product} key={product.id} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div>
+            <SliderNav className="banner-slider-next">
+              <ArrowNext />
+            </SliderNav>
+            <SliderNav className="banner-slider-prev">
+              <ArrowPrev />
+            </SliderNav>
+          </div>
+            </CategoryInner>
+          )
+        }
 
       {loadMore && hasMore && (
         <Box style={{ textAlign: 'center' }} mt={'2rem'}>

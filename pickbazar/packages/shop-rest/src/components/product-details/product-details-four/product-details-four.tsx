@@ -140,61 +140,6 @@ const ProductDetails: React.FunctionComponent<ProductDetailsProps> = ({
               deviceType={deviceType}
             />
           </ProductPreview>
-        <div style={{marginTop: '-60px',zIndex: 1,position: 'absolute',left: '300px',}}>
-          <ProductDescription>
-          <ProductCartBtn>
-              {!isInCart(data.id) ? (
-              <>
-              {!isAuthenticated ? (
-                <Button
-                className='cart-button'
-                variant='primary'
-                style={{float: 'right'}}
-                size='big'
-                onClick={handleJoin}
-              >
-                {/* <CartIcon mr={2} /> */}
-                <ButtonText>
-                  <FormattedMessage
-                    id='addToCartButton'
-                    defaultMessage='Add to Cart'
-                  />
-                </ButtonText>
-              </Button>
-              ) : (
-                <Button
-                  className='cart-button'
-                  variant='primary'
-                  size='big'
-                  style={{float: 'right'}}
-                  onClick={handleAddClick}
-                >
-                  {/* <CartIcon mr={2} /> */}
-                  <ButtonText>
-                    <FormattedMessage
-                      id='addToCartButton'
-                      defaultMessage='Add to Cart'
-                    />
-                  </ButtonText>
-                </Button>
-              )}
-               </>
-              ) :
-              (
-                <div style={{float: 'right'}}>
-                <Counter
-                  value={getItem(data.id).quantity}
-                  url={getItem(data.id).url}
-                  onDecrement={handleRemoveClick}
-                  onIncrement={handleAddClick}
-                  className='card-counter'
-                  variant='altHorizontal'
-                />
-                </div>
-              )}
-            </ProductCartBtn>
-          </ProductDescription>
-        </div>
       </ImagePart>
 
         <ProductInfo dir={isRtl ? 'rtl' : 'ltr'}>
@@ -251,6 +196,59 @@ const ProductDetails: React.FunctionComponent<ProductDetailsProps> = ({
               ))}
             </MetaSingle>
           </ProductDescription>
+          <div >
+            <ProductDescription>
+              <ProductCartBtn>
+                {!isInCart(data.id) ? (
+                    <>
+                      {!isAuthenticated ? (
+                        <Button
+                          className='cart-button'
+                          variant='primary'
+                          size='big'
+                          onClick={handleJoin}
+                        >
+                          {/* <CartIcon mr={2} /> */}
+                          <ButtonText>
+                            <FormattedMessage
+                              id='addToCartButton'
+                              defaultMessage='Add to Cart'
+                            />
+                          </ButtonText>
+                        </Button>
+                      ) : (
+                        <Button
+                          className='cart-button'
+                          variant='primary'
+                          size='big'
+                          onClick={handleAddClick}
+                        >
+                          {/* <CartIcon mr={2} /> */}
+                          <ButtonText>
+                            <FormattedMessage
+                              id='addToCartButton'
+                              defaultMessage='Add to Cart'
+                            />
+                          </ButtonText>
+                        </Button>
+                      )}
+                    </>
+                  ) :
+                  (
+                    <div style={{float: 'right'}}>
+                      <Counter
+                        value={getItem(data.id).quantity}
+                        url={getItem(data.id).url}
+                        onDecrement={handleRemoveClick}
+                        onIncrement={handleAddClick}
+                        className='card-counter'
+                        variant='altHorizontal'
+                      />
+                    </div>
+                  )}
+              </ProductCartBtn>
+            </ProductDescription>
+          </div>
         </ProductInfo>
 
         {isRtl && (
@@ -277,6 +275,7 @@ const ProductDetails: React.FunctionComponent<ProductDetailsProps> = ({
           style={{
             gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
           }}
+          isRelated={true}
         />
       </RelatedItems>
     </>

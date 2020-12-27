@@ -12,6 +12,7 @@ import NoResultFound from 'components/no-result/no-result';
 import LogoImage from 'assets/images/MedsmitraFinallogo.png';
 import { openModal } from '@redq/reuse-modal';
 import { CubeGrid } from 'styled-loaders-react';
+import { string } from 'yup';
 
 const Grid = styled.div(
   css({
@@ -50,6 +51,7 @@ interface Props {
   loadMore?: boolean;
   fetchLimit?: number;
   style?: any;
+  isLandingPage?: boolean;
 }
 
 const FilterDiv = styled.div({
@@ -111,6 +113,7 @@ export const ProductGrid = ({
   type,
   loadMore = true,
   fetchLimit = 30,
+  isLandingPage = false,
 }: Props) => {
   const myRef = useRef(null)
   const executeScroll = () => scrollToRef(myRef)
@@ -128,6 +131,14 @@ export const ProductGrid = ({
     offset: 0,
     limit: fetchLimit,
   });
+
+  let cssList = {
+    margin: '0px 20px 0px 20px',
+    paddingLeft: '230px',
+  };
+  if (isLandingPage) {
+    cssList.paddingLeft= '0px';
+  }
 
 
   if (error) return <ErrorMessage message={error.message} />;
@@ -180,51 +191,69 @@ export const ProductGrid = ({
       }
   };
 
+  // @ts-ignore
   return (
     <div ref={myRef}>
       {(loading===true) ? <CubeGrid color="#009E7F" size="60px"/> :
       <>
-        <FilterDiv>
-          <FilterSection>
-            <h2>Filter By</h2>
-          </FilterSection>
-          <div>
-            <FilterSectionBar><a><span>Shop by Brand</span></a></FilterSectionBar>
-            <FilterSectionItem><a onClick={() => onCategoryClick('baidyanath')}><span>Baidyanath</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('dabur')}><span>Dabur</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('sbl')}><span>Sbl</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('zandu')}><span>Zandu</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('schwabe')}><span>Schwabe</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('himalaya')}><span>Himalaya</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('baksons')}><span>Baksons</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('bio-force')}><span>Bio-Force</span></a></FilterSectionItem>
-          </div>
-          <div>
-            <FilterSectionBar><a><span>Shop by Health Conditions</span></a></FilterSectionBar>
-            <FilterSectionItem><a onClick={() => onCategoryClick('anaemia-and-inflammation')}><span>Anaemia And Inflammation</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('cardiac-care')}><span>Cardiac Care</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('fever-anti-bacteria-viral-infection')}><span>Fever , Anti Bacteria, Viral Infection</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('hair-care')}><span>Hair Care</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('immunity-and-stress-care')}><span>Immunity And Stress Care</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('joint-cramps-sprian-muscle-pains')}><span>Joint, Cramps, Sprian , Muscle Pains</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('nasal-care')}><span>Nasal Care</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('urinary-and-anus-problems')}><span>Urinary And Anus Problems</span></a></FilterSectionItem>
-            <FilterSectionItem><a onClick={() => onCategoryClick('skin-and-beauty-care')}><span>Skin And Beauty Care</span></a></FilterSectionItem>
+        {(isLandingPage === true) ? <></> :
+          <FilterDiv>
+            <FilterSection>
+              <h2>Filter By</h2>
+            </FilterSection>
+            <div>
+              <FilterSectionBar><a><span>Shop by Brand</span></a></FilterSectionBar>
+              <FilterSectionItem><a
+                onClick={() => onCategoryClick('baidyanath')}><span>Baidyanath</span></a></FilterSectionItem>
+              <FilterSectionItem><a onClick={() => onCategoryClick('dabur')}><span>Dabur</span></a></FilterSectionItem>
+              <FilterSectionItem><a onClick={() => onCategoryClick('sbl')}><span>Sbl</span></a></FilterSectionItem>
+              <FilterSectionItem><a onClick={() => onCategoryClick('zandu')}><span>Zandu</span></a></FilterSectionItem>
+              <FilterSectionItem><a
+                onClick={() => onCategoryClick('schwabe')}><span>Schwabe</span></a></FilterSectionItem>
+              <FilterSectionItem><a
+                onClick={() => onCategoryClick('himalaya')}><span>Himalaya</span></a></FilterSectionItem>
+              <FilterSectionItem><a
+                onClick={() => onCategoryClick('baksons')}><span>Baksons</span></a></FilterSectionItem>
+              <FilterSectionItem><a
+                onClick={() => onCategoryClick('bio-force')}><span>Bio-Force</span></a></FilterSectionItem>
+            </div>
+            <div>
+              <FilterSectionBar><a><span>Shop by Health Conditions</span></a></FilterSectionBar>
+              <FilterSectionItem><a onClick={() => onCategoryClick('anaemia-and-inflammation')}><span>Anaemia And Inflammation</span></a></FilterSectionItem>
+              <FilterSectionItem><a
+                onClick={() => onCategoryClick('cardiac-care')}><span>Cardiac Care</span></a></FilterSectionItem>
+              <FilterSectionItem><a onClick={() => onCategoryClick('fever-anti-bacteria-viral-infection')}><span>Fever , Anti Bacteria, Viral Infection</span></a></FilterSectionItem>
+              <FilterSectionItem><a
+                onClick={() => onCategoryClick('hair-care')}><span>Hair Care</span></a></FilterSectionItem>
+              <FilterSectionItem><a onClick={() => onCategoryClick('immunity-and-stress-care')}><span>Immunity And Stress Care</span></a></FilterSectionItem>
+              <FilterSectionItem><a onClick={() => onCategoryClick('joint-cramps-sprian-muscle-pains')}><span>Joint, Cramps, Sprian , Muscle Pains</span></a></FilterSectionItem>
+              <FilterSectionItem><a
+                onClick={() => onCategoryClick('nasal-care')}><span>Nasal Care</span></a></FilterSectionItem>
+              <FilterSectionItem><a onClick={() => onCategoryClick('urinary-and-anus-problems')}><span>Urinary And Anus Problems</span></a></FilterSectionItem>
+              <FilterSectionItem><a
+                onClick={() => onCategoryClick('skin-and-beauty-care')}><span>Skin And Beauty Care</span></a></FilterSectionItem>
 
-          </div>
-          <div>
-            <FilterSectionBar><a><span>Price</span></a></FilterSectionBar>
-            <FilterSectionItem><label><input type={"checkbox"} />Below 200</label></FilterSectionItem>
-            <FilterSectionItem><label><input type={"checkbox"} />201 - 500</label></FilterSectionItem>
-            <FilterSectionItem><label><input type={"checkbox"} />501 - 1000</label></FilterSectionItem>
-            <FilterSectionItem><label><input type={"checkbox"} />Above 1000</label></FilterSectionItem>
-          </div>
-          <div>
-            <button style={{background: '#fff', padding: '2px 4px', color: '#51C9A6', borderColor:'#51C9A6', marginLeft: '150px',}}>View All</button>
-          </div>
-        </FilterDiv>
-
-      <section style={{ margin: '0px 20px 0px 20px', paddingLeft: '230px',}}>
+            </div>
+            <div>
+              <FilterSectionBar><a><span>Price</span></a></FilterSectionBar>
+              <FilterSectionItem><label><input type={"checkbox"}/>Below 200</label></FilterSectionItem>
+              <FilterSectionItem><label><input type={"checkbox"}/>201 - 500</label></FilterSectionItem>
+              <FilterSectionItem><label><input type={"checkbox"}/>501 - 1000</label></FilterSectionItem>
+              <FilterSectionItem><label><input type={"checkbox"}/>Above 1000</label></FilterSectionItem>
+            </div>
+            <div>
+              <button style={{
+                background: '#fff',
+                padding: '2px 4px',
+                color: '#51C9A6',
+                borderColor: '#51C9A6',
+                marginLeft: '150px',
+              }}>View All
+              </button>
+            </div>
+          </FilterDiv>
+        }
+        <section style={cssList} >
         <Grid style={style}>
           {data.map((product) => (
             <ProductCard data={product} key={product.id} />

@@ -130,7 +130,7 @@ export default function GroceryTwoPage({ deviceType }) {
           <MainContentArea>
             <ContentSection>
               <div ref={targetRef}>
-                <ProductGrid type={PAGE_TYPE} />
+                <ProductGrid type={PAGE_TYPE} isLandingPage={true} />
               </div>
             </ContentSection>
           </MainContentArea>
